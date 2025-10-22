@@ -21,9 +21,9 @@
 ## 🛠 Tech Stack
 
 - **Backend**: Python 3.11, FastAPI
-- **Frontend**: React 18, TailwindCSS
+- **Frontend**: React 18, Material UI
 - **AI/ML**: OpenAI GPT-4, LangChain
-- **Database**: PostgreSQL
+- **Database**: SSMS 
 
 ---
 
