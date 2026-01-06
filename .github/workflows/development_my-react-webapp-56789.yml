@@ -1,0 +1,56 @@
+name: Build and deploy React app to Azure Web App - my-react-webapp-56789
+
+on:
+  push:
+    branches:
+      - development
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js version
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20.x'
+
+      - name: Install dependencies and build React app
+        run: |
+          cd Frontend
+          npm install
+          npm run build
+
+      - name: Upload build folder for deployment
+        uses: actions/upload-artifact@v4
+        with:
+          name: react-build
+          path: Frontend/build
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+      - name: Download build artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: react-build
+
+      - name: Login to Azure
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_47EDA77C8C2D415BAF63A401AB26D9C0 }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_47C1A5089E54440E8D0CD458F74AB67F }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_409CF3E709464145BBE5DE56B0B7A722 }}
+
+      - name: Deploy to Azure Web App
+        uses: azure/webapps-deploy@v3
+        with:
+          app-name: 'my-react-webapp-56789'
+          slot-name: 'Production'
+          package: .
