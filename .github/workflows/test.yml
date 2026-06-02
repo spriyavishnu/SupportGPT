@@ -1,0 +1,30 @@
+name: Frontend Tests
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [develop]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v3
+      
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      
+      - run: npm install --legacy-peer-deps
+        working-directory: ./Frontend
+      
+      - run: npm test -- --coverage
+        working-directory: ./Frontend
+      
+      - uses: codecov/codecov-action@v3
+        if: always()
+        with:
+          files: ./Frontend/coverage/coverage-final.json
+          fail_ci_if_error: false
