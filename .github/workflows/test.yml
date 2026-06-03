@@ -17,16 +17,13 @@ jobs:
         with:
           node-version: '20'
       
+      - name: Install build dependencies
+        run: sudo apt-get update && sudo apt-get install -y build-essential python3
+      
       - name: Install dependencies
-        run: npm install --legacy-peer-deps
+        run: npm install --legacy-peer-deps --no-optional
         working-directory: ./Frontend
       
       - name: Run tests
         run: npm test
         working-directory: ./Frontend
-      
-      - name: Upload coverage
-        uses: codecov/codecov-action@v3
-        if: always()
-        with:
-          fail_ci_if_error: false
