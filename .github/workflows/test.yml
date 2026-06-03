@@ -17,20 +17,16 @@ jobs:
         with:
           node-version: '20'
       
-      - uses: actions/checkout@v3
-      
-      - uses: actions/setup-node@v3
-        with:
-          node-version: '20'
-      
-      - run: npm install --legacy-peer-deps
+      - name: Install dependencies
+        run: npm install --legacy-peer-deps
         working-directory: ./Frontend
       
-      - run: npm test -- --coverage
+      - name: Run tests
+        run: npm test
         working-directory: ./Frontend
       
-      - uses: codecov/codecov-action@v3
+      - name: Upload coverage
+        uses: codecov/codecov-action@v3
         if: always()
         with:
-          files: ./Frontend/coverage/coverage-final.json
           fail_ci_if_error: false
