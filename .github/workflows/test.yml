@@ -1,0 +1,30 @@
+name: Frontend Tests
+
+on:
+  push:
+    branches: [main, development]
+  pull_request:
+    branches: [development]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v3
+      
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+      
+      - name: Install dependencies
+        run: npm install --legacy-peer-deps
+        working-directory: ./Frontend
+        env:
+          ROLLDOWN_SKIP_PLUGIN_VALIDATION: 1
+      
+      - name: Run tests
+        run: npm test
+        working-directory: ./Frontend
+        env:
+          ROLLDOWN_WASM_NODEJS: 1
