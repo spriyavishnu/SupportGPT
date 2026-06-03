@@ -23,15 +23,15 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-  "start": "react-scripts start",
-  "build": "react-scripts build",
-  "test": "vitest",
-  "test:ui": "vitest --ui",
-  "test:coverage": "vitest --coverage",
-  "eject": "react-scripts eject",
-  "lint": "eslint src --ext .ts,.tsx",
-  "lint:fix": "eslint src --ext .ts,.tsx --fix"
-},
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "vitest",
+    "test:ui": "vitest --ui",
+    "test:coverage": "vitest --coverage",
+    "eject": "react-scripts eject",
+    "lint": "eslint src --ext .ts,.tsx",
+    "lint:fix": "eslint src --ext .ts,.tsx --fix"
+  },
   "eslintConfig": {
     "extends": [
       "react-app",

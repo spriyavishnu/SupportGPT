@@ -17,16 +17,13 @@ jobs:
         with:
           node-version: '20'
       
-      - run: npm cache clean --force
-        working-directory: ./Frontend
+      - uses: actions/checkout@v3
       
-      - run: rm -rf node_modules
-        working-directory: ./Frontend
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '20'
       
       - run: npm install --legacy-peer-deps
-        working-directory: ./Frontend
-      
-      - run: npm rebuild
         working-directory: ./Frontend
       
       - run: npm test -- --coverage
