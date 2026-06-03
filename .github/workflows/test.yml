@@ -26,6 +26,9 @@ jobs:
       - run: npm install --legacy-peer-deps
         working-directory: ./Frontend
       
+      - run: npm rebuild
+        working-directory: ./Frontend
+      
       - run: npm test -- --coverage
         working-directory: ./Frontend
       
